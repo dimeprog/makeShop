@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:makeshop/controller/productcontroller.dart';
 import 'package:makeshop/utils/dimesnsion.dart';
+import 'package:get/get.dart';
 
-class ProductGrid extends StatelessWidget {
+class ProductItem extends StatelessWidget {
+  final String price;
+  final String imageLink;
+  ProductItem({
+    required this.imageLink,
+    required this.price,
+  });
   @override
   Widget build(BuildContext context) {
+//     return Container(
+//       height: getHeight(200),
+//       color: Colors.black,
+//     );
+//   }
+// }
     return Container(
-      height: getHeight(100),
-      width: getWidth(100),
+      height: getHeight(200),
+      width: getWidth(200),
       child: Card(
         child: GridTile(
           footer: Container(
@@ -15,7 +29,7 @@ class ProductGrid extends StatelessWidget {
             child: Center(
               child: ListTile(
                 trailing: Text(
-                  '\$200',
+                  '\$$price',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: getHeight(20),
@@ -38,7 +52,7 @@ class ProductGrid extends StatelessWidget {
             ),
           ),
           child: Image.network(
-            'https://media.istockphoto.com/photos/pickles-picture-id929981498?s=612x612',
+            imageLink,
             fit: BoxFit.cover,
           ),
         ),
