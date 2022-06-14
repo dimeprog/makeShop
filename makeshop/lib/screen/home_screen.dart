@@ -6,6 +6,7 @@ import 'package:makeshop/widgets/categoryscroll_view.dart';
 import 'package:makeshop/widgets/grid_container.dart';
 
 import '../utils/pageviewAmination.dart';
+import '../widgets/title_container.dart';
 
 class HomeScreen extends StatelessWidget {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -18,21 +19,32 @@ class HomeScreen extends StatelessWidget {
       drawer: AppDrawer(),
       body: SafeArea(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             NavBar(
               iconFunction: _iconFunction,
               isFav: false,
             ),
             SizedBox(
-              height: getHeight(20),
+              height: getHeight(10),
             ),
-            CategoryScrollView(),
+            Padding(
+              padding: EdgeInsets.only(
+                left: getWidth(15),
+              ),
+              child: TitleContainer(),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                left: getWidth(15),
+              ),
+              child: CategoryScrollView(),
+            ),
             SizedBox(
               height: getHeight(40),
             ),
             PageViewContainer(
-              containerHeight: 300,
-              containerWidth: 100,
+              pageHeight: 300,
             ),
           ],
         ),
