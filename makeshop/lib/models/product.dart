@@ -39,7 +39,7 @@ class Product {
   String productLink;
   String websiteLink;
   String description;
-  double rating;
+  double? rating;
   Category? category;
   ProductType? productType;
   List<String> tagList;
@@ -156,7 +156,7 @@ class ProductColor {
   });
 
   String hexValue;
-  String colourName;
+  String? colourName;
 
   factory ProductColor.fromJson(Map<String, dynamic> json) => ProductColor(
         hexValue: json["hex_value"],
