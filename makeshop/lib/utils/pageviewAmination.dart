@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:makeshop/controller/productcontroller.dart';
+import 'package:makeshop/utils/pageview_container.dart';
 
 import 'dimesnsion.dart';
 
 class PageViewContainer extends StatefulWidget {
-  final double containerHeight;
-  final double containerWidth;
-  final double viewPortSize;
+  final double pageHeight;
   PageViewContainer({
-    required this.containerHeight,
-    required this.containerWidth,
-    this.viewPortSize = 0.55,
+    required this.pageHeight,
   });
   @override
   State<PageViewContainer> createState() => _PageViewContainerState();
 }
 
 class _PageViewContainerState extends State<PageViewContainer> {
+  // // controllers
+  final _productController = Get.put(ProductController());
   final PageController _pageViewController = PageController(
     viewportFraction: 0.7,
   );
@@ -40,7 +41,11 @@ class _PageViewContainerState extends State<PageViewContainer> {
     }
   }
 
-  Widget _buildPageContainer(int index) {
+  Widget _buildPageContainer(
+      {required int index,
+      required String imageLink,
+      required String price,
+      required String name}) {
     Matrix4 matrix = new Matrix4.identity();
     if (index == _currPagevalue.floor()) {
       var curScale = 1 - (_currPagevalue - index) * (1 - _scaleFactor);
@@ -67,14 +72,12 @@ class _PageViewContainerState extends State<PageViewContainer> {
 
     return Transform(
       transform: matrix,
-      child: Container(
-        margin: EdgeInsets.only(
-          left: getWidth(20),
-          right: getWidth(20),
-        ),
-        height: getHeight(widget.containerHeight),
-        width: getHeight(widget.containerHeight),
-        color: Color(0xffC9B7B9),
+      child: PageviewContainer(
+        containerHeight: 300,
+        containerWidth: 100,
+        imageLink: imageLink,
+        productName: name,
+        productPrice: price,
       ),
     );
   }
@@ -82,12 +85,17 @@ class _PageViewContainerState extends State<PageViewContainer> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: getHeight(widget.containerHeight),
-      child: PageView.builder(
-        controller: _pageViewController,
-        itemCount: 10,
-        itemBuilder: (context, index) => _buildPageContainer(index),
-      ),
-    );
+        height: getHeight(widget.pageHeight),
+        child: Obx(
+          () => PageView.builder(
+            controller: _pageViewController,
+            itemCount: _productController.Products.length,
+            itemBuilder: (context, index) => _buildPageContainer(
+                index: index,
+                imageLink: _productController.Products[index].imageLink,
+                price: _productController.Products[index].price,
+                name: _productController.Products[index].name),
+          ),
+        ));
   }
 }

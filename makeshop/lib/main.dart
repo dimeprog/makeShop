@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        fontFamily: 'Poppins',
         primarySwatch: Colors.purple,
         accentColor: Colors.pink,
         textSelectionColor: Colors.white,
