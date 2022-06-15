@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:makeshop/controller/productcontroller.dart';
 import 'package:makeshop/screen/product_details_screen.dart';
 
 import 'dimesnsion.dart';
@@ -10,18 +11,30 @@ class PageviewContainer extends StatelessWidget {
   final String imageLink;
   final String productName;
   final String productPrice;
+  final int id;
 
-  PageviewContainer(
-      {required this.containerHeight,
-      required this.containerWidth,
-      required this.imageLink,
-      required this.productName,
-      required this.productPrice});
+  PageviewContainer({
+    required this.containerHeight,
+    required this.containerWidth,
+    required this.imageLink,
+    required this.productName,
+    required this.productPrice,
+    required this.id,
+  });
 
   @override
   Widget build(BuildContext context) {
+    print(id);
+    int currentProductId = id;
+    final curproduct = Get.find<ProductController>()
+        .Products
+        .firstWhere((product) => product.id == id);
+    print(curproduct);
     return GestureDetector(
-      onDoubleTap: () => Get.to(ProductDetailScreen()),
+      onTap: () => Get.to(
+        () => ProductDetailScreen(),
+        arguments: id,
+      ),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
