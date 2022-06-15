@@ -5,10 +5,14 @@ import 'package:makeshop/widgets/app_drawer.dart';
 class NavBar extends StatelessWidget {
   final Function() iconFunction;
   final bool isFav;
+  final IconData mainIcon;
+  final bool isMenu;
 
   NavBar({
     required this.iconFunction,
     required this.isFav,
+    required this.mainIcon,
+    this.isMenu = true,
   });
   @override
   Widget build(BuildContext context) {
@@ -23,15 +27,33 @@ class NavBar extends StatelessWidget {
           IconButton(
             onPressed: iconFunction,
             icon: Icon(
-              Icons.menu,
-              size: getHeight(32),
-              color: Colors.black,
+              mainIcon,
+              size: isMenu ? getHeight(32) : getHeight(25),
+              color: isMenu ? Colors.black : Colors.black87,
             ),
           ),
           isFav
-              ? const Icon(
-                  Icons.favorite_border,
-                  color: Colors.pink,
+              ? Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.favorite_border,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(
+                      width: getWidth(10),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.shopping_cart,
+                        color: Colors.amber,
+                        size: getHeight(25),
+                      ),
+                    ),
+                  ],
                 )
               : Row(
                   children: [

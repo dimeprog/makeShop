@@ -41,11 +41,13 @@ class _PageViewContainerState extends State<PageViewContainer> {
     }
   }
 
-  Widget _buildPageContainer(
-      {required int index,
-      required String imageLink,
-      required String price,
-      required String name}) {
+  Widget _buildPageContainer({
+    required int index,
+    required String imageLink,
+    required String price,
+    required String name,
+    required int productId,
+  }) {
     Matrix4 matrix = new Matrix4.identity();
     if (index == _currPagevalue.floor()) {
       var curScale = 1 - (_currPagevalue - index) * (1 - _scaleFactor);
@@ -78,6 +80,7 @@ class _PageViewContainerState extends State<PageViewContainer> {
         imageLink: imageLink,
         productName: name,
         productPrice: price,
+        id: productId,
       ),
     );
   }
@@ -91,10 +94,12 @@ class _PageViewContainerState extends State<PageViewContainer> {
             controller: _pageViewController,
             itemCount: _productController.Products.length,
             itemBuilder: (context, index) => _buildPageContainer(
-                index: index,
-                imageLink: _productController.Products[index].imageLink,
-                price: _productController.Products[index].price,
-                name: _productController.Products[index].name),
+              index: index,
+              imageLink: _productController.Products[index].imageLink,
+              price: _productController.Products[index].price,
+              name: _productController.Products[index].name,
+              productId: _productController.Products[index].id,
+            ),
           ),
         ));
   }

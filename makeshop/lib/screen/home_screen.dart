@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:makeshop/utils/dimesnsion.dart';
 import 'package:makeshop/utils/nav_bar.dart';
 import 'package:makeshop/widgets/app_drawer.dart';
-import 'package:makeshop/widgets/categoryscroll_view.dart';
+import 'package:makeshop/widgets/detail%20page/categoryscroll_view.dart';
 import 'package:makeshop/widgets/grid_container.dart';
 
 import '../utils/pageviewAmination.dart';
@@ -24,6 +24,7 @@ class HomeScreen extends StatelessWidget {
             NavBar(
               iconFunction: _iconFunction,
               isFav: false,
+              mainIcon: Icons.menu,
             ),
             SizedBox(
               height: getHeight(10),
@@ -43,8 +44,13 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: getHeight(40),
             ),
-            PageViewContainer(
-              pageHeight: 300,
+            Visibility(
+              child: PageViewContainer(
+                pageHeight: 300,
+              ),
+              replacement: const Center(
+                child: CircularProgressIndicator(),
+              ),
             ),
           ],
         ),

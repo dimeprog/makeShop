@@ -5,7 +5,7 @@ import '../models/product.dart';
 import 'package:get/get.dart';
 
 class ProductController extends GetxController {
-  var Products = [].obs;
+  var Products = <Product>[].obs;
 
   @override
   void onInit() {
@@ -16,7 +16,13 @@ class ProductController extends GetxController {
 
   Future<List<Product>> fetchProducts() async {
     var products = await RemoteServices.fetchProducts();
-    print(products![1].imageLink);
-    return Products.value = products;
+    // print(products![1].imageLink);
+    // print(products[1].id);
+    return Products.value = products!;
+  }
+
+  Product fetchProductId(int id) {
+    Product product = Products.firstWhere((prod) => prod.id == id);
+    return product;
   }
 }

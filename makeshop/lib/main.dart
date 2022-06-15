@@ -13,11 +13,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         fontFamily: 'Poppins',
         primarySwatch: Colors.purple,
-        accentColor: Colors.pink,
+        accentColor: Color(0xffF8F2F2),
         textSelectionColor: Colors.white,
       ),
       home: HomeScreen(),
